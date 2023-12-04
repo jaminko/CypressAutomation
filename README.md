@@ -17,5 +17,3 @@ The only download prerequisites are...
 * [git](https://git-scm.com/download/mac)
 * [chrome](https://www.google.com/chrome/)
 * [vs code](https://code.visualstudio.com/download)
-
-
