@@ -17,5 +17,6 @@ jobs:
           # npx cypress info
           # npx cypress --version
 
-      - name: Cleanup Workspace
-        run: npm run cleanup
+      - name: Run tests 
+        run: npx cypress run
+
