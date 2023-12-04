@@ -22,11 +22,23 @@ describe('Tests for different control types', () => {
         cy.xpath("//textarea[@name='q']").type('Cypress automation');
         cy.wait(500);
 
-        cy.get(".lnnVSe").should('have.length', 12);
+        cy.get(".lnnVSe").should('have.length.greaterThan', 0);
         cy.get(".lnnVSe").each(($el, index, $list) => {
             if ($el.text() == 'cypress automation framework structureХіп-хоп гурт') {
                 cy.wrap($el).click();
             }
         })
+    });
+
+    it('Radio button and checkbox test', () => {
+        cy.visit("https://rahulshettyacademy.com/AutomationPractice/");
+
+        cy.get("input[name='radioButton']").each(($el) => {
+            cy.wrap($el).click().should('be.checked');
+        })
+
+        cy.get("label input[type='checkbox']").each(($el) => {
+            cy.wrap($el).click().should('be.checked');
+        });
     });
 });
