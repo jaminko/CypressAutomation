@@ -1,7 +1,7 @@
-describe('Basic test sute, its my introduction to cypress', () => {
+describe('BASIC TEST SUITE - its my introduction to cypress', () => {
     const PAGE_URL = "http://www.automationpractice.pl";
 
-    it('Navigate to the My Shop web page and perform a search with valid search query', () => {
+    it('Perform a search with valid search query - V1', () => {
         cy.visit(PAGE_URL);
         cy.title().should('eq', 'My Shop');
 
@@ -12,7 +12,7 @@ describe('Basic test sute, its my introduction to cypress', () => {
         cy.title().should('eq', 'Search - My Shop');
     })
 
-    it('Navigate to the My Shop web page and perform a search with valid search query', () => {
+    it('Perform a search with valid search query - V2', () => {
         cy.visit(PAGE_URL);
         cy.title().should('eq', 'My Shop');
 
