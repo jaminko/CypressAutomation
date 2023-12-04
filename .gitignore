@@ -1,0 +1,23 @@
+.env
+.idea
+.vscode
+.history/
+
+# testing
+coverage
+cypress.env.json
+cypress/videos/
+cypress/screenshots
+cypress/reports/
+cypress/results/
+node_modules
+cypress/cucumber-json
+cypress/testsData/numbers.json
+cypress/testsData/templates.json
+cypress/testsData/dTRs/*.json
+cypress/testsData/Dealer_Portal/*.json
+cypress/testsData/MVC_NJ/*.json
+cypress?testsData
+numbers.json
+
+**/.DS_Store

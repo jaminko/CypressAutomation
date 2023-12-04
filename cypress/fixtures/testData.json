@@ -1,0 +1,6 @@
+{
+    "loginPageUrl": "http://www.automationpractice.pl/index.php?controller=authentication&back=my-account",
+    "womenPageUrl": "http://www.automationpractice.pl/index.php?id_category=3&controller=category",
+    "userName": "yaugoitrepece-1938@yopmail.com",
+    "password": "Qwerty12345!"
+}
