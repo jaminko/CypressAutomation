@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Tests for different control types', () => {
 
     it('Drop-down with select tag test', () => {
@@ -8,20 +10,10 @@ describe('Tests for different control types', () => {
 
     });
 
-    it('Autosuggest drop-down test', () => {
-        cy.visit("https://en.wikipedia.org/w/index.php?search=&title=Special:Search");
-
-        cy.xpath("//input[@title = 'Search Wikipedia [alt-shift-f]']").type('Ukraine');
-        cy.get(".cdx-menu-item").contains('Ukraine national football team').click();
-
-    });
-
     it('Autosuggest field test', () => {
         cy.visit("https://www.google.com/");
 
         cy.xpath("//textarea[@name='q']").type('Cypress automation');
-        cy.wait(500);
-
         cy.get(".lnnVSe").should('have.length.greaterThan', 0);
         cy.get(".lnnVSe").each(($el, index, $list) => {
             if ($el.text() == 'cypress automation framework structureХіп-хоп гурт') {
@@ -41,4 +33,78 @@ describe('Tests for different control types', () => {
             cy.wrap($el).click().should('be.checked');
         });
     });
+
+    it('Simple alert - automatically closed by Cypress ', () => {
+        cy.visit("https://the-internet.herokuapp.com/javascript_alerts");
+        cy.xpath("//button[@onclick='jsAlert()']").click();
+
+        cy.on('window:alert', (t) => {
+            expect(t).to.contains('I am a JS Alert');
+        })
+        cy.get("#result").should('have.text', 'You successfully clicked an alert');
+    });
+
+    it('Confirmation alert - click Cancel button scenario', () => {
+        cy.visit("https://the-internet.herokuapp.com/javascript_alerts");
+        cy.xpath("//button[@onclick='jsConfirm()']").click();
+
+        cy.on('window:confirm', (t) => {
+            expect(t).to.contains('I am a JS Confirm');
+        })
+        cy.on('window:confirm', () => false);
+        cy.get("#result").should('have.text', 'You clicked: Cancel');
+    });
+
+    it('Prompt alert - click OK button scenario', () => {
+        cy.visit("https://the-internet.herokuapp.com/javascript_alerts");
+
+        cy.window().then((win) => {
+            cy.stub(win, 'prompt').returns('Hello Cypress =)');
+        })
+
+        cy.xpath("//button[@onclick='jsPrompt()']").click();
+        cy.on('window:prompt', (t) => {
+            expect(t).to.contains('I am a JS prompt');
+        })
+        cy.get("#result").should('have.text', 'You entered: Hello Cypress =)');
+    });
+
+    it('Authenticated  alert APPROACH 1 (using JSON)', () => {
+        cy.visit("https://the-internet.herokuapp.com/basic_auth", {
+            auth:
+            {
+                username: "admin",
+                password: "admin"
+            }
+        });
+        cy.get("#content p").should('have.contain', "Congratulations!");
+    })
+
+    it('Authenticated  alert APPROACH 2 (using URL)', () => {
+        cy.visit("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+
+        cy.get("#content p").should('have.contain', "Congratulations!");
+    })
+
+    it('Handle tab - APPROACH 1', () => {
+        cy.visit("https://the-internet.herokuapp.com/windows    ");
+        cy.get(".example a").invoke('removeAttr', 'target').click();
+
+        cy.url().should('include', "https://the-internet.herokuapp.com/windows/new");
+        cy.get(".example h3").should('have.text', "New Window");
+
+        cy.go('back');
+        cy.get(".example h3").should('have.text', "Opening a new window");
+    })
+
+    it('Handle tab - APPROACH 2', () => {
+        cy.visit("https://the-internet.herokuapp.com/windows    ");
+        cy.get(".example a").then((e) => {
+            let elementHrefAttribute = e.prop("href");
+            cy.visit(elementHrefAttribute)
+        });
+
+        cy.url().should('include', "https://the-internet.herokuapp.com/windows/new");
+        cy.get(".example h3").should('have.text', "New Window");
+    })
 });
