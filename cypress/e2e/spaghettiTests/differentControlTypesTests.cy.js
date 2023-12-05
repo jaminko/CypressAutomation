@@ -87,7 +87,7 @@ describe('Tests for different control types', () => {
     })
 
     it('Handle tab - APPROACH 1', () => {
-        cy.visit("https://the-internet.herokuapp.com/windows    ");
+        cy.visit("https://the-internet.herokuapp.com/windows");
         cy.get(".example a").invoke('removeAttr', 'target').click();
 
         cy.url().should('include', "https://the-internet.herokuapp.com/windows/new");
@@ -98,7 +98,7 @@ describe('Tests for different control types', () => {
     })
 
     it('Handle tab - APPROACH 2', () => {
-        cy.visit("https://the-internet.herokuapp.com/windows    ");
+        cy.visit("https://the-internet.herokuapp.com/windows");
         cy.get(".example a").then((e) => {
             let elementHrefAttribute = e.prop("href");
             cy.visit(elementHrefAttribute)
@@ -106,5 +106,17 @@ describe('Tests for different control types', () => {
 
         cy.url().should('include', "https://the-internet.herokuapp.com/windows/new");
         cy.get(".example h3").should('have.text', "New Window");
+    })
+
+    it.only('Handling Iframes', () => {
+        cy.visit("https://the-internet.herokuapp.com/iframe");
+        cy.get("#mce_0_ifr").should('exist');
+
+        cy.getIframe("#mce_0_ifr")
+            .clear()
+            .type('Hello word!!! {ctrl+a}');
+
+        cy.get("button[aria-label='Italic']").click();
+        cy.get("button[aria-label='Bold']").click();
     })
 });

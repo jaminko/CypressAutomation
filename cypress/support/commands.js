@@ -26,3 +26,10 @@
 // type definitions for Cypress object "cy"
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
+
+Cypress.Commands.add('getIframe', (iframeLocator) => {
+    return cy.get(iframeLocator)
+        .its('0.contentDocument.body')
+        .should('be.visible')
+        .then(cy.wrap);
+})
