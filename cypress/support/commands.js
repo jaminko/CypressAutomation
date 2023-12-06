@@ -26,6 +26,8 @@
 // type definitions for Cypress object "cy"
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
+import 'cypress-file-upload';
+
 
 Cypress.Commands.add('getIframe', (iframeLocator) => {
     return cy.get(iframeLocator)
