@@ -1,14 +1,13 @@
 class LoginPage {
-    elements = {
-        usernameInput: () => cy.xpath("//input[@id='email']"),
-        passwordInput: () => cy.xpath("//input[@id='passwd']"),
-        loginButton: () => cy.xpath("//button[@id='SubmitLogin']")
-    }
+    signInButton = () => cy.get(".login");
+    usernameInput = () => cy.xpath("//input[@id='email']");
+    passwordInput = () => cy.xpath("//input[@id='passwd']");
+    loginButton = () => cy.xpath("//button[@id='SubmitLogin']");
 
-    login(username, password) {
-        this.elements.usernameInput().type(username);
-        this.elements.passwordInput().type(password);
-        this.elements.loginButton().click();
+    act_login = (username, password) => {
+        this.usernameInput().type(username);
+        this.passwordInput().type(password);
+        this.loginButton().click();
     }
 }
 

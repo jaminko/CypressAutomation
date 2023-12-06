@@ -26,10 +26,24 @@
 // type definitions for Cypress object "cy"
 /// <reference types="cypress" />
 /// <reference types="cypress-xpath" />
+import 'cypress-file-upload';
+
 
 Cypress.Commands.add('getIframe', (iframeLocator) => {
     return cy.get(iframeLocator)
         .its('0.contentDocument.body')
         .should('be.visible')
         .then(cy.wrap);
+})
+
+Cypress.Commands.add('isPageTitleCorrect', (expectedTitle) => {
+    return cy.title().and('eq', expectedTitle).then(cy.wrap);
+})
+
+Cypress.Commands.add('isPageUrlIncludeTargetPath', (targetPath) => {
+    return cy.url().should('include', targetPath).then(cy.wrap);
+})
+
+Cypress.Commands.add('isElementHasCorrectSignature', (element, targetSignature) => {
+    return element.should('contain', targetSignature).then(cy.wrap);
 })

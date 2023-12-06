@@ -1,3 +1,5 @@
+import 'cypress-file-upload';
+
 describe('BASIC TEST SUITE - its my introduction to cypress', () => {
     const PAGE_URL = "http://www.automationpractice.pl";
 
@@ -61,8 +63,45 @@ describe('BASIC TEST SUITE - its my introduction to cypress', () => {
         cy.xpath("//img[@alt='Flag of Ukraine']").scrollIntoView({ duration: 2000 });
         cy.xpath("//img[@alt='Flag of Ukraine']").should('be.visible');
 
-        // Scrolling to Ukraine flag
+        // Scrolling to Mexico flag
         cy.xpath("//img[@alt='Flag of Mexico']").scrollIntoView({ duration: 2000 });
         cy.xpath("//img[@alt='Flag of Mexico']").should('be.visible');
     });
+
+    it('File upload', () => {
+        cy.visit("https://the-internet.herokuapp.com/upload");
+
+        cy.get("#file-upload").attachFile('fileToUpload1.txt');
+        cy.get("#file-submit").click();
+
+        cy.get(".example").should('contain', "File Uploaded!");
+
+    });
+
+    it('File upload with file renaming', () => {
+        cy.visit("https://the-internet.herokuapp.com/upload");
+
+        cy.get("#file-upload").attachFile({ filePath: 'fileToUpload1.txt', fileName: 'newName.txt' });
+        cy.get("#file-submit").click();
+
+        cy.get("#uploaded-files").should('contain', "newName.txt");
+    });
+
+    it('Multiple file upload', () => {
+        cy.visit("https://davidwalsh.name/demo/multiple-file-upload.php");
+
+        cy.get("#filesToUpload").attachFile(['fileToUpload1.txt', 'fileToUpload2.txt']);
+
+        cy.get("#fileList").should('contain', "fileToUpload1.txt").should('contain', "fileToUpload2.txt");
+    });
+
+    // For some reason this test doesn't work on my end
+    /*     it.only('File upload for shadow DOM', () => {
+            cy.visit("https://web.dev/articles/shadowdom-v1");
+            cy.get(".demoarea").scrollIntoView({ duration: 2000 });
+    
+            cy.xpath('//body/section[1]/section[1]/main[1]/devsite-content[1]/article[1]/div[2]/figure[1]/iframe[1]')
+                .then(cy.wrap)
+                .shadow("//button[text()='Tab 3']", { includeShadowDom: true }).should('be.visible');
+        }); */
 })
