@@ -4,7 +4,7 @@ class LoggedInPage {
 
     pageHeading = () => cy.xpath("//h1[@class='page-heading']");
     logOutLink = () => cy.get(".logout");
-    userNameInfo = () => cy.get(".header_user_info a span");
+    userNameInfo = () => cy.get(".header_user_info a");
 
     ass_logOutLinkText(targetText) {
         return this.logOutLink().should('contain', targetText);

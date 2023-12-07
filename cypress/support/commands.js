@@ -58,7 +58,7 @@ Cypress.Commands.add('clickLink', (label) => {
 })
 
 // -- The custom command for overwriting contains() method --
-Cypress.Commands.overwrite("contains", function (contains, filter, text, userOptions = {}) {
+/* Cypress.Commands.overwrite("contains", function (contains, filter, text, userOptions = {}) {
     if (Cypress._.isRegExp(text)) {
         // .contains(filter, text)
         // Do nothing
@@ -76,4 +76,4 @@ Cypress.Commands.overwrite("contains", function (contains, filter, text, userOpt
     let contains0 = contains.bind(this)
     return contains0(filter, text, userOptions)
 }
-)
+) */

@@ -8,10 +8,10 @@ const PAGE_URL = testData.loginPageUrl;
 const URER_NAME = testData.userName;
 const PASSWORD = testData.password;
 
-let tD;
+let newTestData;
 before('Get test data from JSON file', () => {
     cy.fixture("testData.json").then((dd) => {
-        tD = dd;
+        newTestData = dd;
     })
 })
 
@@ -27,7 +27,7 @@ describe('Login feature tests', () => {
         loggedInPage.ass_logOutLinkText('Sign out');
         cy.isPageTitleCorrect('My account - My Shop');
         cy.isPageUrlIncludeTargetPath('controller=my-account');
-        cy.should('have.text')
+        cy.isElementHasCorrectSignature(loggedInPage.userNameInfo(), "Sign out")
     });
 
     it('Verify user log-out', () => {
@@ -42,12 +42,12 @@ describe('Login feature tests', () => {
 
     it('Verify alert message for the login field', () => {
         loginPage.act_login(" ", PASSWORD);
-        cy.isElementHasCorrectSignature(loginPage.errorMessage(), tD.loginFldErrorMessage)
+        cy.isElementHasCorrectSignature(loginPage.errorMessage(), newTestData.loginFldErrorMessage)
     });
 
     it('Verify alert message for the password field', () => {
         loginPage.act_login(URER_NAME, " ");
-        cy.isElementHasCorrectSignature(loginPage.errorMessage(), tD.passwordFldErrorMessage)
+        cy.isElementHasCorrectSignature(loginPage.errorMessage(), newTestData.passwordFldErrorMessage)
     });
 
     it('Verify alert messages with different test data', () => {
