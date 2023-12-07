@@ -143,4 +143,14 @@ describe('BASIC TEST SUITE - its my introduction to cypress', () => {
         // Page reload
         cy.reload();
     });
+
+    it('Screenshot feature test', () => {
+        // Capture page and element screenshots manualy
+        cy.visit('http://www.automationpractice.pl/index.php?controller=authentication&back=my-account');
+        // cy.screenshot("homepage");
+        // cy.get("a[title='Women']").screenshot("block_top_menu_Women_item");
+
+        // Capture screenshots and video automatically on failure (only when running from the command prompt)
+        // cy.isPageTitleCorrect('Women - My Shop');
+    });
 })

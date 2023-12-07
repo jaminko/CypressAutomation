@@ -1,19 +1,24 @@
 class LoginPage {
-    signInButton = () => cy.get(".login");
-    usernameInput = () => cy.xpath("//input[@id='email']");
-    passwordInput = () => cy.xpath("//input[@id='passwd']");
-    loginButton = () => cy.xpath("//button[@id='SubmitLogin']");
-    errorMessage = () => cy.get(".alert-danger ol");
+    signInBtn = () => cy.get(".login");
+    usernameInp = () => cy.xpath("//input[@id='email']");
+    passwordInp = () => cy.xpath("//input[@id='passwd']");
+    loginBtn = () => cy.xpath("//button[@id='SubmitLogin']");
+    errorMsg = () => cy.get(".alert-danger ol");
+    forgotPasswordLnk = () => cy.get(".lost_password.form-group a");
 
     act_login = (username, password) => {
-        this.usernameInput().type(username);
-        this.passwordInput().type(password);
-        this.loginButton().click();
+        this.usernameInp().type(username);
+        this.passwordInp().type(password);
+        this.loginBtn().click();
     }
 
     act_clearLoginForm = () => {
-        this.usernameInput().clear();
-        this.passwordInput().clear();
+        this.usernameInp().clear();
+        this.passwordInp().clear();
+    }
+
+    act_clickForgotPasswordLnk = () => {
+        this.forgotPasswordLnk().click();
     }
 }
 

@@ -3,19 +3,19 @@
 class LoggedInPage {
 
     pageHeading = () => cy.xpath("//h1[@class='page-heading']");
-    logOutLink = () => cy.get(".logout");
-    userNameInfo = () => cy.get(".header_user_info a");
+    logOutLnk = () => cy.get(".logout");
+    userNameInf = () => cy.get(".header_user_info a");
 
-    ass_logOutLinkText(targetText) {
-        return this.logOutLink().should('contain', targetText);
+    ass_hasLogOutLnkCorrectSignature(targetText) {
+        return this.logOutLnk().should('contain', targetText);
     }
 
     ass_hasCorrectUserInfo(targetText) {
-        return this.userNameInfo().should('contain', targetText);
+        return this.userNameInf().should('contain', targetText);
     }
 
     act_logOut = () => {
-        this.logOutLink().click();
+        this.logOutLnk().click();
     }
 }
 
