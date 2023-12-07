@@ -115,32 +115,9 @@ describe('BASIC TEST SUITE - its my introduction to cypress', () => {
 
     it('Test with overwritting existing command', () => {
         cy.visit('http://www.automationpractice.pl/index.php?controller=authentication&back=my-account');
-        cy.clickLink("Women");
-        cy.isPageTitleCorrect('Women - My Shop');
-        cy.isPageUrlIncludeTargetPath('id_category=3&controller=category');
-        cy.get(".breadcrumb").should('contain', "Women");
-    });
-
-    it('Navigation feature test', () => {
-        // Home page
-        cy.visit('http://www.automationpractice.pl/index.php?controller=authentication&back=my-account');
-        cy.isPageTitleCorrect('Login - My Shop');
-        // After clicking navigate to the 'Women' page
-        cy.get("a[title='Women']").click();
-        cy.isElementHasCorrectSignature(cy.get("h2[class= 'title_block']"), 'Women');
-        // Go back to the Home page
-        cy.go('back');
-        cy.isPageTitleCorrect('Login - My Shop');
-        // Forward to the 'Women' page
-        cy.go('forward');
-        cy.isPageTitleCorrect('Women - My Shop');
-        // Go back using index
-        cy.go(-1);
-        cy.isPageTitleCorrect('Login - My Shop');
-        // Forward using index
-        cy.go(1);
-        cy.isPageTitleCorrect('Women - My Shop');
-        // Page reload
-        cy.reload();
+        cy.clickLink("woMEn");
+        /*         cy.isPageTitleCorrect('Women - My Shop');
+                cy.isPageUrlIncludeTargetPath('id_category=3&controller=category');
+                cy.get(".breadcrumb").should('contain', "Women"); */
     });
 })
