@@ -108,7 +108,7 @@ describe('Tests for different control types', () => {
         cy.get(".example h3").should('have.text', "New Window");
     })
 
-    it.only('Handling Iframes', () => {
+    it('Handling Iframes', () => {
         cy.visit("https://the-internet.herokuapp.com/iframe");
         cy.get("#mce_0_ifr").should('exist');
 

@@ -50,7 +50,7 @@ describe('Login feature tests', () => {
         cy.isElementHasCorrectSignature(loginPage.errorMessage(), tD.passwordFldErrorMessage)
     });
 
-    it.only('Verify alert messages with different test data', () => {
+    it('Verify alert messages with different test data', () => {
         cy.fixture("loginData.json").then((data) => {
             data.forEach((userData) => {
                 loginPage.act_login(userData.userName, userData.password);
