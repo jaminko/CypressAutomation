@@ -60,7 +60,7 @@ describe('Login page tests', () => {
         })
     });
 
-    it.only('Verifying forgot your password link', () => {
+    it('Verifying forgot your password link', () => {
         loginPage.act_clickForgotPasswordLnk();
         cy.isPageTitleCorrect('Forgot your password - My Shop');
         cy.isPageUrlIncludeTargetPath('controller=password');
