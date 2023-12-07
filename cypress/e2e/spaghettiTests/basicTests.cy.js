@@ -113,15 +113,15 @@ describe('BASIC TEST SUITE - its my introduction to cypress', () => {
         cy.get(".breadcrumb").should('contain', "Women");
     });
 
-    it('Test with overwritting existing command', () => {
+    it.only('Test with overwritting existing command', () => {
         cy.visit('http://www.automationpractice.pl/index.php?controller=authentication&back=my-account');
-        cy.clickLink("woMEn");
-        /*         cy.isPageTitleCorrect('Women - My Shop');
-                cy.isPageUrlIncludeTargetPath('id_category=3&controller=category');
-                cy.get(".breadcrumb").should('contain', "Women"); */
+        cy.clickLink("Women");
+        cy.isPageTitleCorrect('Women - My Shop');
+        cy.isPageUrlIncludeTargetPath('id_category=3&controller=category');
+        cy.get(".breadcrumb").should('contain', "Women");
     });
 
-    it.only('Navigation feature test', () => {
+    it('Navigation feature test', () => {
         // Home page
         cy.visit('http://www.automationpractice.pl/index.php?controller=authentication&back=my-account');
         cy.isPageTitleCorrect('Login - My Shop');
