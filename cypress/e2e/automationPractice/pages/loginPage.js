@@ -1,4 +1,5 @@
 class LoginPage {
+
     signInBtn = () => cy.get(".login");
     usernameInp = () => cy.xpath("//input[@id='email']");
     passwordInp = () => cy.xpath("//input[@id='passwd']");

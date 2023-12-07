@@ -11,4 +11,5 @@ class ForgotPasswordPage {
         return this.emailAddressFld().type(userEmailAddress);
     }
 }
+
 export default new ForgotPasswordPage;
