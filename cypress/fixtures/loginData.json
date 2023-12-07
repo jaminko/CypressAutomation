@@ -1,0 +1,22 @@
+[
+    {
+        "userName": "  ",
+        "password": "Qwerty12345!",
+        "targetErrorMessage": "An email address required."
+    },
+    {
+        "userName": "yaugoitrepece-1938@yopmail.com",
+        "password": "  ",
+        "targetErrorMessage": "Password is required."
+    },
+    {
+        "userName": "@yopmail.com",
+        "password": "Qwerty12345!",
+        "targetErrorMessage": "Invalid email address."
+    },
+    {
+        "userName": "yaugoitrepece-1938@yopmail.com",
+        "password": "Qwerty123",
+        "targetErrorMessage": "Authentication failed."
+    }
+]

@@ -1,5 +1,7 @@
 {
     "loginPageUrl": "http://www.automationpractice.pl/index.php?controller=authentication&back=my-account",
     "userName": "yaugoitrepece-1938@yopmail.com",
-    "password": "Qwerty12345!"
+    "password": "Qwerty12345!",
+    "loginFldErrorMessage": "An email address required.",
+    "passwordFldErrorMessage": "Password is required."
 }
