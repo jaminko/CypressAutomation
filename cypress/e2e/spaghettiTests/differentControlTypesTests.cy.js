@@ -119,4 +119,37 @@ describe('Tests for different control types', () => {
         cy.get("button[aria-label='Italic']").click();
         cy.get("button[aria-label='Bold']").click();
     })
-});
+
+    it('Select item from the Google maps drop-down', () => {
+        cy.visit("https://www.google.com/maps/");
+        cy.xpath("//div[@id='searchbox']").type("Emirates Stadium");
+        cy.xpath("(//div[@jsaction='suggestion.select']) [1]").click();
+        cy.get(".bwoZTb span", { timeout: 5000 }).then((x) => {
+            let targetItemSignature = x.text();
+
+            expect("Emirates Stadium").to.equal(targetItemSignature);
+            assert.equal(targetItemSignature, "Emirates Stadium");
+        })
+    })
+
+    it('Select item from the Google drop-down', () => {
+        cy.visit("https://jsfiddle.net/gh/get/library/pure/googlemaps/js-samples/tree/master/dist/samples/places-autocomplete-addressform/jsfiddle");
+
+        cy.get("iframe[name='result']", { timeout: 5000 })
+            .should('be.visible')
+            .should('not.be.empty')
+            .then(($iframe) => {
+                const $body = $iframe.contents().find('html', { timeout: 5000 })
+                //
+                cy.wrap($body)
+                    .find("input[name='ship-address']", { timeout: 5000 })
+                    .type('London');
+                cy.wrap($body)
+                    .find(".pac-container").should('be.visible');
+                cy.wrap($body)
+                    .find(".pac-item:first").click();
+                cy.wrap($body)
+                    .find(".pac-container").should('not.be.visible');
+            })
+    })
+})
