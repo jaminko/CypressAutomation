@@ -9,8 +9,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
+      - name: Setup npm package
+        run: |
+          # npm i -g npx
+          npm install
+          # npx cypress verify
+          # npx cypress info
+          # npx cypress --version
         with:
           command: npm run ui-regression
 
