@@ -2,20 +2,15 @@ name: E2E on Chrome
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup npm package
-        run: |
-          # npm i -g npx
-          npm install
-          # npx cypress verify
-          # npx cypress info
-          # npx cypress --version
+        - name: Cypress run
+        uses: cypress-io/github-action@v4
         with:
           command: npm run ui-regression
 
