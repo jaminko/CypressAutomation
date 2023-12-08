@@ -123,7 +123,7 @@ describe('Tests for different control types', () => {
     it('Select item from the Google maps drop-down', () => {
         cy.visit("https://www.google.com/maps/");
         cy.xpath("//div[@id='searchbox']").type("Emirates Stadium");
-        cy.xpath("(//div[@jsaction='suggestion.select']) [1]").click();
+        cy.get("(//div[@class='sW9vGe']) [1]").click();
         cy.get(".bwoZTb span", { timeout: 5000 }).then((x) => {
             let targetItemSignature = x.text();
 
