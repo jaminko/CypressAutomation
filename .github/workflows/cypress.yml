@@ -9,14 +9,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup npm package
-        run: |
-          # npm i -g npx
-          npm install
-          # npx cypress verify
-          # npx cypress info
-          # npx cypress --version
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          command: npm run ui-regression
 
-      - name: Run tests 
-        run: npx cypress run
-
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-execution-report
+          path: cypress/reports/html
+          retention-days: 30
