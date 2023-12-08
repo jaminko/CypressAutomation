@@ -28,3 +28,9 @@ jobs:
           path: cypress/reports/html
           retention-days: 30
 
+      - name: Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: New version of the Cypress Automation Test Framework done!
