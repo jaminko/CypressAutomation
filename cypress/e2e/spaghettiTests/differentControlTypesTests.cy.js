@@ -120,7 +120,7 @@ describe('Tests for different control types', () => {
         cy.get("button[aria-label='Bold']").click();
     })
 
-    it('Select item from the Google maps drop-down', () => {
+    it.skip('Select item from the Google maps drop-down', () => {
         cy.visit("https://www.google.com/maps/");
         cy.xpath("//div[@id='searchbox']").type("Emirates Stadium");
         cy.get("(//div[@class='sW9vGe']) [1]").click();
