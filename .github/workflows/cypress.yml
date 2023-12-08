@@ -3,13 +3,11 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    # let's make sure our tests pass on Chrome browser
-    name: E2E on Chrome
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-        - name: Cypress run
+      - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
           command: npm run ui-regression
