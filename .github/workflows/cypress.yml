@@ -18,5 +18,13 @@ jobs:
           # npx cypress --version
 
       - name: Run tests 
-        run: npx cypress run
+        run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/**.js
+
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-execution-report
+          path: cypress/reports/html
+          retention-days: 30
 
