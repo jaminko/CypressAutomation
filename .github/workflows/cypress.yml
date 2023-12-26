@@ -65,7 +65,7 @@ jobs:
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_success.png \
-          -F caption="Build number ${{ github.run_number }} SUCCESS 😎
+          -F caption="*Build number ${{ github.run_number }} SUCCESS* 😎
                   BRANCH: *${{ github.ref }}*
                   REPO: *${{ github.repository }}*
                   OWNER: *${{ github.repository_owner }}*
