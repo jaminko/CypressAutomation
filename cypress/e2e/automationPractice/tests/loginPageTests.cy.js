@@ -79,6 +79,6 @@ describe("Login page tests", () => {
     cy.isPageTitleCorrect("Forgot your password - My Shop");
     cy.isPageUrlIncludeTargetPath("controller=password");
     forgotPasswordPage.emailAddressFld().should("be.visible");
-    forgotPasswordPage.retrievePasswordBtn().should("be.visible");
+    forgotPasswordPage.retrievePasswordBtn().should("not.be.visible");
   });
 });
