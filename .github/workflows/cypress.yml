@@ -34,11 +34,12 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: Build number *${{ github.run_number }}* SUCCESS 😎
+          format: markdown
           message: |
-            Branch: *${{ github.ref }}*
-            Repository: *${{ github.repository }}*
-            Owner: *${{ github.repository_owner }}*
+            GIT: Build number *${{ github.run_number }}* SUCCESS 😎
+            BRANCH: *${{ github.ref }}*
+            REPO: *${{ github.repository }}*
+            OWNER: *${{ github.repository_owner }}*
 
       - name: Telegram notification about failed build
         uses: appleboy/telegram-action@master
@@ -52,5 +53,3 @@ jobs:
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
             OWNER: *${{ github.repository_owner }}*
-
-            
