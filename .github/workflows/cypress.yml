@@ -30,6 +30,8 @@ jobs:
           
       - name: Telegram notification about successful build
         run: |
+          RUN_ID=${{ github.run_id }}
+          URL="https://github.com/jaminko/cypress-automation/actions/runs/$RUN_ID"
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_success.png \
@@ -39,7 +41,7 @@ jobs:
           🌳BRANCH: ${{ github.ref }}
           📂REPO: ${{ github.repository }}
           👑OWNER: ${{ github.repository_owner }}
-          
+          URL: $URL
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: success()
 
