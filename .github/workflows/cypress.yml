@@ -62,20 +62,15 @@ jobs:
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: failure()
 
-      - name: Get Artifacts
-        id: get_artifacts
+      - name: Get Artifact Download URL
+        id: get_artifact_url
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          RUN_ID=${{ github.run_id }}
-          ARTIFACTS=$(curl -sL -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/actions/runs/$RUN_ID/artifacts")
-          ARTIFACT_ID=$(echo "$ARTIFACTS" | jq -r '.artifacts[0].id')  # Assuming this is the first artifact, change if needed
-          echo "Artifact ID: $ARTIFACT_ID"
-          echo "::set-output name=artifact_id::$ARTIFACT_ID"
-          shell: bash
+          ARTIFACT_URL=$(curl -sL https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.artifacts[] | select(.name=="cypress-execution-report") | .archive_download_url')
+          echo "::set-output name=artifact_url::$ARTIFACT_URL"
 
       - name: Telegram notification with Cypress Reports
         run: |
-          REPORT_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/$ARTIFACT_ID"
+          REPORT_URL="${{ steps.get_artifact_url.outputs.artifact_url }}"
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F text="New Cypress Mocha Reports are available! Check them out: ${REPORT_URL}"
