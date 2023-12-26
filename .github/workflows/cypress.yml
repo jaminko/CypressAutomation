@@ -36,8 +36,8 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            PHOTO: './cypress/images/build_success.jpg'
-            GIT: Build number *${{ github.run_number }}* SUCCESS 😎
+            PHOTO: /cypress/images/build_success.jpg
+            GIT: Build number *${{ github.run_number }} SUCCESS* 😎
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
             OWNER: *${{ github.repository_owner }}*
@@ -52,7 +52,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            PHOTO: './cypress/images/build_failed.png'
+            PHOTO: /cypress/images/build_failed.png
             GIT: Build number *${{ github.run_number }} FAILED* 😢
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
