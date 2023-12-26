@@ -29,6 +29,7 @@ jobs:
           retention-days: 30
           
       - name: Telegram notification about successful build
+        format: markdown
         run: |
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
@@ -40,6 +41,8 @@ jobs:
           OWNER: <b>${{ github.repository_owner }}</b>
           
           COMMIT MESSAGE: ${{ github.event.head_commit.message }}"
+          -H "Content-Type: application/x-www-form-urlencoded" \
+          --data-urlencode "parse_mode=Markdown"
         if: success()
 
       - name: Telegram notification about failed build
@@ -54,5 +57,7 @@ jobs:
           OWNER: *${{ github.repository_owner }}*
           
           COMMIT MESSAGE: ${{ github.event.head_commit.message }}"
+          -H "Content-Type: application/x-www-form-urlencoded" \
+          --data-urlencode "parse_mode=Markdown"
         if: failure()
         
