@@ -40,7 +40,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args:  Success! Build number ${{ github.run_number }}
+          args: Build number ${{ github.run_number }} SUCCESS 😎 Report URL - ${{ steps.report.outputs.url }}
 
       - name: Telegram notification about failed build
         uses: appleboy/telegram-action@master
@@ -48,12 +48,6 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args:  Failed!!! Build number ${{ github.run_number }}
-          template: |
-            Status: ${{ job.status }}
-            Job name: ${{ job.name }}
-            Build number: ${{ github.run_number }}
-            Committer: ${{ github.actor }}
-            Commit message: ${{ github.event.head_commit.message }}
-            Workflow name: ${{ github.workflow }}
-            Report URL: ${{ steps.report.outputs.url }}
+          args: Build number ${{ github.run_number }} FAILED 😢 Report URL - ${{ steps.report.outputs.url }}
+
+            
