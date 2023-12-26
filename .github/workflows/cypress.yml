@@ -34,14 +34,12 @@ jobs:
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_success.png \
           -F caption="
-          GIT: <b>Build number ${{ github.run_number }} SUCCESS</b> 😎
-          BRANCH: <b>${{ github.ref }}</b>
-          REPO: <b>${{ github.repository }}</b>
-          OWNER: <b>${{ github.repository_owner }}</b>
+          ✔️GIT: Build number ${{ github.run_number }} SUCCESS 😎
+          🌳BRANCH: ${{ github.ref }}
+          📂REPO: ${{ github.repository }}
+          👑OWNER: ${{ github.repository_owner }}
           
-          COMMIT MESSAGE: ${{ github.event.head_commit.message }}"
-          -H "Content-Type: application/x-www-form-urlencoded" \
-          --data-urlencode "parse_mode=Markdown"
+          📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: success()
 
       - name: Telegram notification about failed build
@@ -50,13 +48,10 @@ jobs:
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_failed.png \
           -F caption="
-          GIT: Build number *${{ github.run_number }} FAILED* 😎
-          BRANCH: *${{ github.ref }}*
-          REPO: *${{ github.repository }}*
-          OWNER: *${{ github.repository_owner }}*
+          ❌GIT: Build number ${{ github.run_number }} FAILED 😎
+          🌳BRANCH: ${{ github.ref }}
+          📂REPO: ${{ github.repository }}
+          👑OWNER: ${{ github.repository_owner }}
           
-          COMMIT MESSAGE: ${{ github.event.head_commit.message }}"
-          -H "Content-Type: application/x-www-form-urlencoded" \
-          --data-urlencode "parse_mode=Markdown"
+          📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: failure()
-        
