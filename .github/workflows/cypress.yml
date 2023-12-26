@@ -65,4 +65,9 @@ jobs:
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
             OWNER: *${{ github.repository_owner }}*
+            REPORT: ${{ env.GITHUB_ACTIONS_URL }}
+            REP: https://github.com/jaminko/cypress-automation/actions/runs/
+            
+            COMMIT MESSAGE: ${{ github.event.head_commit.message }}
+
         
