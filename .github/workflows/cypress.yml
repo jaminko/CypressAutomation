@@ -34,10 +34,10 @@ jobs:
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_success.png \
           -F caption="
-          GIT: Build number *${{ github.run_number }} SUCCESS* 😎
-          BRANCH: *${{ github.ref }}*
-          REPO: *${{ github.repository }}*
-          OWNER: *${{ github.repository_owner }}*
+          GIT: <b>Build number ${{ github.run_number }} SUCCESS</b> 😎
+          BRANCH: <b>${{ github.ref }}</b>
+          REPO: <b>${{ github.repository }}</b>
+          OWNER: <b>${{ github.repository_owner }}</b>
           
           COMMIT MESSAGE: ${{ github.event.head_commit.message }}"
         if: success()
