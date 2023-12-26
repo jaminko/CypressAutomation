@@ -35,7 +35,7 @@ jobs:
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_success.png \
-          -F document=@cypress/reports/index.html \
+          -F document=@/github/workspace/cypress/reports/index.html \
           -F caption="
           ✔️GIT: Build number ${{ github.run_number }} 
           SUCCESS 😁
@@ -54,7 +54,7 @@ jobs:
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_failed.png \
-          -F document=@cypress/reports/index.html \
+          -F document=@/github/workspace/cypress/reports/index.html \
           -F caption="
           ❌GIT: Build number ${{ github.run_number }}
           FAILED 😭
