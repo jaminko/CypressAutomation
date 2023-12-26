@@ -41,7 +41,8 @@ jobs:
           🌳BRANCH: ${{ github.ref }}
           📂REPO: ${{ github.repository }}
           👑OWNER: ${{ github.repository_owner }}
-          🌐URL: $URL
+          🌐NEW REPORT IS AVAILABLE! CHECK IT OUT: $URL
+          
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: success()
 
@@ -58,19 +59,7 @@ jobs:
           🌳BRANCH: ${{ github.ref }}
           📂REPO: ${{ github.repository }}
           👑OWNER: ${{ github.repository_owner }}
-          🌐URL: $URL
+          🌐NEW REPORT IS AVAILABLE! CHECK IT OUT: $URL
+          
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: failure()
-
-      - name: Set Artifact URL
-        run: |
-            ARTIFACT_URL=$(curl -sL https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.artifacts[] | select(.name=="cypress-reports") | .archive_download_url')
-            echo "ARTIFACT_URL=${ARTIFACT_URL}" >> $GITHUB_ENV 
-
-      - name: Telegram notification with Cypress Reports
-        run: |
-            REPORT_URL="${ARTIFACT_URL}"
-            curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -F text="New Cypress Mocha Reports are available! Check them out: ${REPORT_URL}"
-            if: always()
