@@ -27,6 +27,14 @@ jobs:
           name: cypress-execution-report
           path: cypress/reports/html
           retention-days: 30
+
+      - name: Get Report URL
+        id: report
+        run: |
+          ARTIFACT_URL=$(curl -sL https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.artifacts[] | select(.name=="cypress-execution-report") | .archive_download_url')
+          echo "Report URL is $ARTIFACT_URL"
+          echo "REPORT_URL=$ARTIFACT_URL" >> $GITHUB_ENV
+          echo "GitHub Actions URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
           
       - name: Telegram notification about successful build
         uses: appleboy/telegram-action@master
@@ -40,7 +48,9 @@ jobs:
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
             OWNER: *${{ github.repository_owner }}*
-            ~
+            REPORT: ${{ env.GITHUB_ACTIONS_URL }}
+            REP: https://github.com/jaminko/cypress-automation/actions/runs/
+            
             COMMIT MESSAGE: ${{ github.event.head_commit.message }}
 
       - name: Telegram notification about failed build
@@ -55,3 +65,4 @@ jobs:
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
             OWNER: *${{ github.repository_owner }}*
+        
