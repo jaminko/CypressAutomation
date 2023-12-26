@@ -80,6 +80,5 @@ describe("Login page tests", () => {
     cy.isPageUrlIncludeTargetPath("controller=password");
     forgotPasswordPage.emailAddressFld().should("be.visible");
     forgotPasswordPage.retrievePasswordBtn().should("be.visible");
-    forgotPasswordPage.retrievePasswordBtn().should("be.above");
   });
 });
