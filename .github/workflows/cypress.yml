@@ -62,20 +62,13 @@ jobs:
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: failure()
 
-      - name: Upload Cypress Mocha Reports
-          uses: actions/upload-artifact@v2
-          with:
-          name: cypress-reports
-          path: cypress/reports
-
-
       - name: Set Artifact URL
-          run: |
+        run: |
             ARTIFACT_URL=$(curl -sL https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.artifacts[] | select(.name=="cypress-reports") | .archive_download_url')
             echo "ARTIFACT_URL=${ARTIFACT_URL}" >> $GITHUB_ENV 
 
       - name: Telegram notification with Cypress Reports
-          run: |
+        run: |
             REPORT_URL=${ARTIFACT_URL}
             curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
             -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
