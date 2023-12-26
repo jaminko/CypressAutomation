@@ -69,7 +69,7 @@ jobs:
 
       - name: Telegram notification with Cypress Reports
         run: |
-            REPORT_URL=${ARTIFACT_URL}
+            REPORT_URL="${ARTIFACT_URL}"
             curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
             -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
             -F text="New Cypress Mocha Reports are available! Check them out: ${REPORT_URL}"
