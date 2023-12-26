@@ -40,6 +40,8 @@ jobs:
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
             OWNER: *${{ github.repository_owner }}*
+            ~
+            COMMIT MESSAGE: ${{ github.event.head_commit.message }}
 
       - name: Telegram notification about failed build
         uses: appleboy/telegram-action@master
