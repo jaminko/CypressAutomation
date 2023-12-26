@@ -27,14 +27,20 @@ jobs:
           name: cypress-execution-report
           path: cypress/reports/html
           retention-days: 30
-
+          
+      - name: Get Report URL
+        id: report
+        run: |
+          ARTIFACT_URL=$(curl -sL https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.artifacts[] | select(.name=="cypress-execution-report") | .archive_download_url')
+          echo "::set-output name=url::$ARTIFACT_URL"
+          
       - name: Telegram notification about success build
         uses: appleboy/telegram-action@master
         if: ${{ success() }}
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args:  Success - Build number ${{ github.run_number }} version of the Cypress Automation Test Framework done!
+          args:  Success! Build number ${{ github.run_number }}
 
       - name: Telegram notification about failed build
         uses: appleboy/telegram-action@master
@@ -42,4 +48,12 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args:  Failed - Build number ${{ github.run_number }} version of the Cypress Automation Test Framework failed!!!
+          args:  Failed!!! Build number ${{ github.run_number }}
+          template: |
+            Status: ${{ job.status }}
+            Job name: ${{ job.name }}
+            Build number: ${{ github.run_number }}
+            Committer: ${{ github.actor }}
+            Commit message: ${{ github.event.head_commit.message }}
+            Workflow name: ${{ github.workflow }}
+            Report URL: ${{ steps.report.outputs.url }}
