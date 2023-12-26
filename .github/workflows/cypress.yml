@@ -30,7 +30,15 @@ jobs:
 
       - name: Telegram notification
         uses: appleboy/telegram-action@master
+        if: ${{ success() }}
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args:  Success - Build number ${{ github.run_number }} version of the Cypress Automation Test Framework done!
+          args: Success - Build number ${{ github.run_number }} version of the Cypress Automation Test Framework success!
+
+      - if: ${{ failure() }}
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_CHAT_ID }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            args: Failure - Build number ${{ github.run_number }} version of the Cypress Automation Test Framework failed!
