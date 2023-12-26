@@ -33,7 +33,7 @@ jobs:
         run: |
           ARTIFACT_URL=$(curl -sL https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.artifacts[] | select(.name=="cypress-execution-report") | .archive_download_url')
           echo "Report URL is $ARTIFACT_URL"
-          echo "Report URL ::set-output name=url::$ARTIFACT_URL" >> $GITHUB_ENV
+          echo "REPORT_URL=$ARTIFACT_URL" >> $GITHUB_ENV
 
           
       - name: Telegram notification about successful build
