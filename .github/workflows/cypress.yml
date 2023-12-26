@@ -28,7 +28,7 @@ jobs:
           path: cypress/reports/html
           retention-days: 30
           
-      - name: Telegram text notification about successful build
+      - name: Telegram notification about successful build
         uses: appleboy/telegram-action@master
         if: ${{ success() }}
         with:
@@ -36,6 +36,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
+            PHOTO: 'build_success.png'
             GIT: Build number *${{ github.run_number }} SUCCESS* 😎
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
@@ -43,15 +44,7 @@ jobs:
             
             COMMIT MESSAGE: ${{ github.event.head_commit.message }}
 
-      - name: Telegram photo notification about successful build
-        run: |
-          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
-          -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-          -F photo=@build_success.png \
-          -F caption="Build number ${{ github.run_number }} SUCCESS 😎
-        if: ${{ success() }}
-
-      - name: Telegram text notification about failed build
+      - name: Telegram notification about failed build
         uses: appleboy/telegram-action@master
         if: ${{ failure() }}
         with:
@@ -59,6 +52,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
+            PHOTO: 'build_failed.png'
             GIT: Build number *${{ github.run_number }} FAILED* 😢
             BRANCH: *${{ github.ref }}*
             REPO: *${{ github.repository }}*
@@ -66,13 +60,15 @@ jobs:
 
             COMMIT MESSAGE: ${{ github.event.head_commit.message }}
 
-      - name: Telegram photo notification about failed build
+      - name: Telegram notification about successful build
         run: |
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-          -F photo=@build_failed.png \
+          -F photo=@build_success.png \
           -F caption="Build number ${{ github.run_number }} SUCCESS 😎
+                  BRANCH: *${{ github.ref }}*
+                  REPO: *${{ github.repository }}*
+                  OWNER: *${{ github.repository_owner }}*
+                  COMMIT MESSAGE: ${{ github.event.head_commit.message }}"
         if: ${{ success() }}
-
-
-
+            
