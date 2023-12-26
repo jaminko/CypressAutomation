@@ -34,7 +34,8 @@ jobs:
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_success.png \
           -F caption="
-          ✔️GIT: Build number ${{ github.run_number }} SUCCESS 😎
+          ✔️GIT: Build number ${{ github.run_number }} 
+          SUCCESS 😁
           🌳BRANCH: ${{ github.ref }}
           📂REPO: ${{ github.repository }}
           👑OWNER: ${{ github.repository_owner }}
@@ -48,7 +49,8 @@ jobs:
           -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
           -F photo=@build_failed.png \
           -F caption="
-          ❌GIT: Build number ${{ github.run_number }} FAILED 😎
+          ❌GIT: Build number ${{ github.run_number }}
+          FAILED 😭
           🌳BRANCH: ${{ github.ref }}
           📂REPO: ${{ github.repository }}
           👑OWNER: ${{ github.repository_owner }}
