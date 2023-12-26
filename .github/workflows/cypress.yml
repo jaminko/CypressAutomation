@@ -60,4 +60,12 @@ jobs:
           👑OWNER: ${{ github.repository_owner }}
           🌐URL: $URL
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
-        if: failure()
+        if: failure()  
+
+      - name: Telegram notification with Cypress Reports
+        run: |
+          REPORT_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/reports"
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+          -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+          -F text="New Cypress Mocha Reports are available! Check them out: ${REPORT_URL}"
+        if: always()
