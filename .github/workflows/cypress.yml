@@ -48,9 +48,9 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            Build number *${{ github.run_number }} FAILED* 😢
-            Branch: *${{ github.ref }}*
-            Repository: *${{ github.repository }}*
-            Owner: *${{ github.repository_owner }}*
+            GIT: Build number *${{ github.run_number }} FAILED* 😢
+            BRANCH: *${{ github.ref }}*
+            REPO: *${{ github.repository }}*
+            OWNER: *${{ github.repository_owner }}*
 
             
