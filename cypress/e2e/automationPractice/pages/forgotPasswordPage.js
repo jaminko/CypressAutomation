@@ -1,4 +1,4 @@
-class ForgotPasswordPage {
+export default class ForgotPasswordPage {
   emailAddressFld = () => cy.get("#email");
   retrievePasswordBtn = () => cy.get("fieldset button[type='submit']");
 
@@ -10,5 +10,3 @@ class ForgotPasswordPage {
     return this.emailAddressFld().type(userEmailAddress);
   }
 }
-
-export default new ForgotPasswordPage();

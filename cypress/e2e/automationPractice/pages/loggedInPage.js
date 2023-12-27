@@ -1,4 +1,4 @@
-class LoggedInPage {
+export default class LoggedInPage {
   pageHeading = () => cy.xpath("//h1[@class='page-heading']");
   logOutLnk = () => cy.get(".logout");
   userNameInfoLnk = () => cy.get(".account span");
@@ -7,5 +7,3 @@ class LoggedInPage {
     this.logOutLnk().click();
   };
 }
-
-export default new LoggedInPage();
