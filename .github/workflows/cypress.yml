@@ -16,8 +16,7 @@ jobs:
           # npx cypress verify
           # npx cypress info
           # npx cypress --version
-
-      - name: Run tests
+      - name: Run tests 
         run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/**.js
 
       - name: Uploading artifact
@@ -25,44 +24,41 @@ jobs:
         if: always()
         with:
           name: cypress-execution-report
-          path: cypress/reports/html
+          path: cypress/reports
           retention-days: 30
-
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: cypress-execution-report
-          path: cypress/temp/
-
+          
       - name: Telegram notification about successful build
-        uses: appleboy/telegram-action@master
-        if: ${{ success() }}
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          message: |
-            PHOTO: './images/build_success.png'
-            GIT: Build number *${{ github.run_number }} SUCCESS* 😎
-            BRANCH: *${{ github.ref }}*
-            REPO: *${{ github.repository }}*
-            OWNER: *${{ github.repository_owner }}*
-
-            COMMIT MESSAGE: ${{ github.event.head_commit.message }}
-            DOWNLOAD ARTIFACT: [Link to Cypress Execution Report](https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}/cypress-execution-report)
+        run: |
+          RUN_ID=${{ github.run_id }}
+          URL="https://github.com/jaminko/cypress-automation/actions/runs/$RUN_ID"
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
+          -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+          -F photo=@build_success.png \
+          -F caption="
+          ✔️GIT: Build number ${{ github.run_number }} 
+          SUCCESS 😁
+          🌳BRANCH: ${{ github.ref }}
+          📂REPO: ${{ github.repository }}
+          👑OWNER: ${{ github.repository_owner }}
+          🌐NEW REPORT IS AVAILABLE! [CHECK IT OUT]($URL)
+          
+          📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
+        if: success()
 
       - name: Telegram notification about failed build
-        uses: appleboy/telegram-action@master
-        if: ${{ failure() }}
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          message: |
-            PHOTO: './images/build_failed.png'
-            GIT: Build number *${{ github.run_number }} FAILED* 😢
-            BRANCH: *${{ github.ref }}*
-            REPO: *${{ github.repository }}*
-            OWNER: *${{ github.repository_owner }}*
-
-            COMMIT MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          RUN_ID=${{ github.run_id }}
+          URL="https://github.com/jaminko/cypress-automation/actions/runs/$RUN_ID"
+          curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendPhoto" \
+          -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+          -F photo=@build_failed.png \
+          -F caption="
+          ❌GIT: Build number ${{ github.run_number }}
+          FAILED 😭
+          🌳BRANCH: ${{ github.ref }}
+          📂REPO: ${{ github.repository }}
+          👑OWNER: ${{ github.repository_owner }}
+          🌐NEW REPORT IS AVAILABLE! [CHECK IT OUT]($URL)
+          
+          📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
+        if: failure()
