@@ -39,7 +39,10 @@ jobs:
           🌳BRANCH: ${{ github.ref }}
           📂REPO: ${{ github.repository }}
           👑OWNER: ${{ github.repository_owner }}
-          🌐DOWNLOAD: [Link to Cypress Execution Report]((https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }}))
+        with:
+          format: markdown
+          message: |
+            🌐DOWNLOAD: [Link to Cypress Execution Report](https://github.com/${{ github.repository }}/actions/artifacts/${{ github.run_id }})
           
           📝COMMIT MESSAGE: ${{ github.event.head_commit.message }}🚀"
         if: success()
