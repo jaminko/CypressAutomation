@@ -2,7 +2,7 @@
   "name": "cypressautomation",
   "version": "1.0.0",
   "description": "",
-  "main": "cypress.config.js",
+  "main": "index.js",
   "scripts": {
     "run-all-tests-headless": "npx cypress run --browser chrome --headless --spec 'cypress/e2e/**/*.cy.js'",
     "run-all-tests-headed": "npx cypress run --browser chrome --headed --spec 'cypress/e2e/**/*.cy.js'",
