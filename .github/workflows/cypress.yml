@@ -5,6 +5,10 @@ jobs:
     runs-on: ubuntu-20.04
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,6 +22,10 @@ jobs:
           # npx cypress --version
       - name: Run tests 
         run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/**.js
+
+        env:
+          SPLIT: ${{ strategy.job-total }}
+          SPLIT_INDEX: ${{ strategy.job-index }}
 
       - name: Uploading artifact
         uses: actions/upload-artifact@v2

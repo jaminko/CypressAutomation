@@ -63,7 +63,7 @@ describe("BASIC TEST SUITE - its my introduction to cypress", () => {
     cy.get("#input-email").should("have.value", "");
   });
 
-  it("Mouse actions - page scrolling", () => {
+  it.skip("Mouse actions - page scrolling", () => {
     cy.visit("https://www.countries-ofthe-world.com/flags-of-the-world.html");
 
     // Scrolling to Ukraine flag

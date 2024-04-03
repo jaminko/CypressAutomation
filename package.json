@@ -2,15 +2,22 @@
   "name": "cypressautomation",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "cypress.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run-all-tests-headless": "npx cypress run --browser chrome --headless --spec 'cypress/e2e/**/*.cy.js'",
+    "run-all-tests-headed": "npx cypress run --browser chrome --headed --spec 'cypress/e2e/**/*.cy.js'",
+    "ui-mode": "npx cypress open",
+    "cy-parallel": "cypress-parallel -d cypress/e2e/**/*.cy.js -t 2 -s run-all-tests-headed"
   },
   "author": "IvanMocherniuk",
   "devDependencies": {
-    "cypress": "^10.11.0",
+    "cypress": "^13.7.2",
     "cypress-file-upload": "^5.0.8",
     "cypress-mochawesome-reporter": "^3.7.0",
+    "cypress-split": "^1.21.2",
     "cypress-xpath": "^2.0.1"
+  },
+  "dependencies": {
+    "cypress-parallel": "^0.14.0"
   }
 }
