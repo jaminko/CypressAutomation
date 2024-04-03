@@ -6,10 +6,10 @@ jobs:
     timeout-minutes: 1
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [1, 2, 3,]
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     containers: [1, 2, 3,]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,9 +24,9 @@ jobs:
       - name: Run tests 
         run: npm run run-all-tests-headless
 
-        env:
-          SPLIT: ${{ strategy.job-total }}
-          SPLIT_INDEX: ${{ strategy.job-index }}
+        # env:
+        #   SPLIT: ${{ strategy.job-total }}
+        #   SPLIT_INDEX: ${{ strategy.job-index }}
 
       - name: Uploading artifact
         uses: actions/upload-artifact@v2
