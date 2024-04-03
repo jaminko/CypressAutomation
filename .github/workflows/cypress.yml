@@ -21,7 +21,7 @@ jobs:
           # npx cypress info
           # npx cypress --version
       - name: Run tests 
-        run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/loginPageTests.cy.js
+        run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/*.cy.js
 
         env:
           SPLIT: ${{ strategy.job-total }}
