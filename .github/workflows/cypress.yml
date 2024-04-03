@@ -3,6 +3,7 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
+    timeout-minutes: 1
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
     strategy:
@@ -21,7 +22,7 @@ jobs:
           # npx cypress info
           # npx cypress --version
       - name: Run tests 
-        run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/loginPageTests.cy.js
+        run: npm run run-all-tests-headless
 
         env:
           SPLIT: ${{ strategy.job-total }}
