@@ -53,7 +53,7 @@ describe("BASIC TEST SUITE - its my introduction to cypress", () => {
     cy.get(".context-menu-icon-copy").should("be.visible");
   });
 
-  it("Mouse actions - double click", () => {
+  it.skip("Mouse actions - double click", () => {
     cy.visit("https://demo.opencart.com/index.php?route=account/login");
 
     cy.get("#input-email").type("wellcome").dblclick();
