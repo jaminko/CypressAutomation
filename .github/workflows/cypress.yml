@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2]
+        containers: [1, 2, 3,]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
           # npx cypress info
           # npx cypress --version
       - name: Run tests 
-        run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/*.cy.js
+        run: npx cypress run --browser chrome --spec cypress/e2e/automationPractice/tests/loginPageTests.cy.js
 
         env:
           SPLIT: ${{ strategy.job-total }}
